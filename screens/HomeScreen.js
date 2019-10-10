@@ -1,5 +1,5 @@
 import * as WebBrowser from 'expo-web-browser';
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Image,
   Platform,
@@ -10,7 +10,8 @@ import {
   View,
   TextInput,
   Button,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  FlatList
 } from 'react-native';
 
 const avatarURL = username => "https://avatars.io/twitter/" + username
@@ -26,10 +27,47 @@ const Header = props => {
   )
 }
 
+const Tweet = props => {
+  return (
+    <View style={styles.tweet}>
+      <Image
+        style={styles.tweetAvatar}
+        source={{uri: avatarURL(props.username)}}
+      />
+      <Text style={styles.tweetbody}>{props.body}</Text>
+    </View>
+  )
+}
+
+const initialTweets = [
+  {
+    id: 0,
+    username: "jamonholmgren",
+    body: "Hey, twitter peeps!!!"
+  },
+  {
+    id: 1,
+    username: "jamonholmgren",
+    body: "This is a great class"
+  }
+]
+
 export default function HomeScreen() {
+  const [tweets, setTweets] = useState(initialTweets)
+
   return (
     <KeyboardAvoidingView style={styles.container} behavior="height" enabled>
       <Header />
+      <FlatList
+        data={tweets}
+        renderItem={({item}) => {
+          return <Tweet
+            username={item.username}
+            body={item.body}
+          />
+        }}
+        keyExtractor={item => item.id.toString()}
+      />
       <View style={styles.tabBarInfoContainer}>
         <TextInput style={styles.composeTweet} />
         <Button style={styles.sendButton} title={"Send"} />
@@ -196,5 +234,22 @@ const styles = StyleSheet.create({
     textAlign: "center",
     padding: 20,
     marginRight: 50
+  },
+  tweet: {
+    fontSize: 14,
+    flexDirection: "row",
+    padding: 10
+  },
+  tweetAvatar: {
+    width: 30,
+    height: 30,
+    borderRadius: 15
+  },
+  tweetbody: {
+    flex: 1,
+    marginLeft: 10,
+    padding: 5,
+    fontSize: 15
   }
+
 });
