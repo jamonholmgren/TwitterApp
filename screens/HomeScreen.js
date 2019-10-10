@@ -54,6 +54,19 @@ const initialTweets = [
 
 export default function HomeScreen() {
   const [tweets, setTweets] = useState(initialTweets)
+  const [currentText, setCurrentText] = useState("")
+  const [id, setId] = useState(2)
+
+  const sendTweet = () => {
+    const newTweet = {
+      id,
+      username: "jamonholmgren",
+      body: currentText,
+    }
+    setTweets(tweets.concat([newTweet]))
+    setCurrentText("")
+    setId(id + 1)
+  }
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="height" enabled>
@@ -69,8 +82,16 @@ export default function HomeScreen() {
         keyExtractor={item => item.id.toString()}
       />
       <View style={styles.tabBarInfoContainer}>
-        <TextInput style={styles.composeTweet} />
-        <Button style={styles.sendButton} title={"Send"} />
+        <TextInput
+          style={styles.composeTweet}
+          value={currentText}
+          onChangeText={setCurrentText}
+        />
+        <Button
+          style={styles.sendButton}
+          title={"Send"}
+          onPress={sendTweet}
+        />
       </View>
     </KeyboardAvoidingView>
   );
