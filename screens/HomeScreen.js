@@ -12,11 +12,23 @@ import {
   Button
 } from 'react-native';
 
-import { MonoText } from '../components/StyledText';
+const avatarURL = username => "https://avatars.io/twitter/" + username
+const Header = props => {
+  return (
+    <View style={styles.header}>
+      <Image
+        style={styles.headerAvatar}
+        source={{uri: avatarURL("jamonholmgren")}}
+      />
+      <Text style={styles.headerTitle}>Home</Text>
+    </View>
+  )
+}
 
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
+      <Header />
       <View style={styles.tabBarInfoContainer}>
         <TextInput style={styles.composeTweet} />
         <Button style={styles.sendButton} title={"Send"} />
@@ -163,4 +175,25 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#2e78b7',
   },
+  header: {
+    marginTop: 20,
+    height: 90,
+    padding: 20,
+    borderBottomColor: "#CDCDCD",
+    borderBottomWidth: 0.5,
+    flexDirection: "row"
+  },
+  headerAvatar: {
+    width: 50,
+    height: 50,
+    borderRadius: 25
+  },
+  headerTitle: {
+    flex: 1,
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign: "center",
+    padding: 20,
+    marginRight: 50
+  }
 });
