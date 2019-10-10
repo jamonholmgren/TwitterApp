@@ -9,7 +9,8 @@ import {
   TouchableOpacity,
   View,
   TextInput,
-  Button
+  Button,
+  KeyboardAvoidingView
 } from 'react-native';
 
 const avatarURL = username => "https://avatars.io/twitter/" + username
@@ -27,13 +28,13 @@ const Header = props => {
 
 export default function HomeScreen() {
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container} behavior="height" enabled>
       <Header />
       <View style={styles.tabBarInfoContainer}>
         <TextInput style={styles.composeTweet} />
         <Button style={styles.sendButton} title={"Send"} />
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
