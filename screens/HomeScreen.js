@@ -8,6 +8,8 @@ import {
   Text,
   TouchableOpacity,
   View,
+  TextInput,
+  Button
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
@@ -15,19 +17,9 @@ import { MonoText } from '../components/StyledText';
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      
-
       <View style={styles.tabBarInfoContainer}>
-        <Text style={styles.tabBarInfoText}>
-          This is a tab bar. You can edit it in:
-        </Text>
-
-        <View
-          style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-          <MonoText style={styles.codeHighlightText}>
-            navigation/MainTabNavigator.js
-          </MonoText>
-        </View>
+        <TextInput style={styles.composeTweet} />
+        <Button style={styles.sendButton} title={"Send"} />
       </View>
     </View>
   );
@@ -138,7 +130,19 @@ const styles = StyleSheet.create({
     }),
     alignItems: 'center',
     backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
+    padding: 20,
+    flexDirection: "row"
+  },
+  composeTweet: {
+    flex: 5,
+    height: 40,
+    fontSize: 14,
+    borderWidth: 0.5,
+    borderColor: "#DEDEDE",
+    borderRadius: 10
+  },
+  sendButton: {
+    flex: 1
   },
   tabBarInfoText: {
     fontSize: 17,
